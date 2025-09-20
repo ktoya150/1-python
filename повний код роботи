@@ -1,0 +1,263 @@
+print("\n1.1 Variables of different types:")
+integer_var = 17
+float_var = 3.14159
+string_var = "Hello, Python!"
+list_var = [1, 2, 3, 4, 5]
+dict_var = {"name": "Ivan", "age": 25, "city": "Kyiv"}
+bool_var = True
+
+print(f"Integer: {integer_var} (type: {type(integer_var)})")
+print(f"Float: {float_var} (type: {type(float_var)})")
+print(f"String: {string_var} (type: {type(string_var)})")
+print(f"List: {list_var} (type: {type(list_var)})")
+print(f"Dictionary: {dict_var} (type: {type(dict_var)})")
+print(f"Boolean: {bool_var} (type: {type(bool_var)})")
+
+print("\n1.2 Parity check:")
+number = 17
+if number % 2 == 0:
+    print(f"Number {number} is even")
+else:
+    print(f"Number {number} is odd")
+
+print("\n1.3 Loops:")
+print("For loop (list elements):")
+for item in list_var:
+    print(f"Element: {item}")
+
+print("\nWhile loop (while counter < 5):")
+counter = 0
+while counter < 5:
+    print(f"Counter: {counter}")
+    counter += 1
+
+print("\n1.4 Function:")
+def process_data(value, multiplier=1):
+    """Function for data processing"""
+    result = value * multiplier
+    print(f"Input value: {value}, multiplier: {multiplier}, result: {result}")
+    return result
+
+result1 = process_data(5)
+result2 = process_data(5, 3)
+
+import numpy as np
+
+print("=" * 50)
+print("Task 2 - Using numpy")
+print("=" * 50)
+
+print("\n2.1 Numpy arrays of different types:")
+
+one_dim_array = np.array([1, 2, 3, 4, 5])
+print(f"One-dimensional array: {one_dim_array}")
+print(f"Dimensions: {one_dim_array.shape}")
+print(f"Type: {one_dim_array.dtype}")
+
+two_dim_array = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(f"\nTwo-dimensional array:\n{two_dim_array}")
+print(f"Dimensions: {two_dim_array.shape}")
+print(f"Type: {two_dim_array.dtype}")
+
+print("\n2.2 Arithmetic operations:")
+
+array_a = np.array([1, 2, 3, 4, 5])
+array_b = np.array([6, 7, 8, 9, 10])
+
+print(f"Array A: {array_a}")
+print(f"Array B: {array_b}")
+
+addition = array_a + array_b
+print(f"Addition (A + B): {addition}")
+
+multiplication = array_a * array_b
+print(f"Multiplication (A * B): {multiplication}")
+
+print("\n2.3 Array from 0 to 1 with step 0.1:")
+
+step_array = np.arange(0, 1.1, 0.1)
+print(f"Array: {step_array}")
+print(f"Dimensions: {step_array.shape}")
+
+print("\n2.4 Dot product:")
+
+vector1 = np.array([1, 2, 3])
+vector2 = np.array([4, 5, 6])
+
+print(f"Vector 1: {vector1}")
+print(f"Vector 2: {vector2}")
+
+dot_product = np.dot(vector1, vector2)
+print(f"Dot product: {dot_product}")
+
+import matplotlib.pyplot as plt
+
+print("=" * 50)
+print("Task 3 - Data visualization with matplotlib")
+print("=" * 50)
+
+print("\n3.1 Plot of y = x^2")
+plt.figure(figsize=(10, 6))
+x = np.linspace(-10, 10, 400)
+y = x**2
+plt.plot(x, y)
+
+plt.title('Graph of y = x^2')
+plt.xlabel('x-axis')
+plt.ylabel('y-axis')
+plt.grid(True)
+plt.show()
+
+print("\n3.3 Multiple curves with legend")
+plt.figure(figsize=(10, 6))
+
+x = np.linspace(-5, 5, 400)
+y1 = x**2
+y2 = x**3
+y3 = np.sin(x) * 10
+
+plt.plot(x, y1, 'b-', label='y = x²', linewidth=2)
+plt.plot(x, y2, 'r--', label='y = x³', linewidth=2)
+plt.plot(x, y3, 'g-.', label='y = 10*sin(x)', linewidth=2)
+
+plt.title('Multiple Function Plots')
+plt.xlabel('x values')
+plt.ylabel('y values')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+print("\n3.4 Histogram from random data")
+plt.figure(figsize=(10, 6))
+
+np.random.seed(42)  
+random_data = np.random.normal(0, 1, 1000)  
+
+plt.hist(random_data, bins=30, alpha=0.7, color='purple', edgecolor='black')
+plt.title('Histogram of Random Data (Normal Distribution)')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.grid(True, alpha=0.3)
+plt.show()
+
+print("\nAll visualization tasks completed successfully!")
+
+import pandas as pd
+from sklearn.datasets import load_diabetes
+
+print("=" * 50)
+print("Task 4 - Working with Diabetes Dataset")
+print("=" * 50)
+
+print("\n4.1 Loading Diabetes dataset from sklearn")
+
+diabetes_data = load_diabetes()
+print(f"Dataset type: {type(diabetes_data)}")
+print(f"Dataset keys: {diabetes_data.keys()}")
+
+df = pd.DataFrame(diabetes_data.data, columns=diabetes_data.feature_names)
+df['target'] = diabetes_data.target
+
+print(f"\nDataFrame shape: {df.shape}")
+print(f"Features: {diabetes_data.feature_names}")
+print(f"Target variable description: {diabetes_data.DESCR.split(chr(10))[1]}")
+
+print("\n4.2 First 5 records of DataFrame:")
+print(df.head())
+
+print("\n4.3 Statistical information (describe()):")
+print(df.describe())
+
+print("\n4.4 Target variable distribution:")
+target_stats = df['target'].describe()
+print("Target variable statistics:")
+print(target_stats)
+
+print("\nTarget variable distribution in bins:")
+bins = [df['target'].min(), 100, 150, 200, df['target'].max()]
+labels = ['Low', 'Medium', 'High', 'Very High']
+df['target_category'] = pd.cut(df['target'], bins=bins, labels=labels, include_lowest=True)
+target_counts = df['target_category'].value_counts().sort_index()
+print(target_counts)
+
+print("\n" + "="*50)
+print("Additional Dataset Information")
+print("="*50)
+print(f"Number of features: {len(diabetes_data.feature_names)}")
+print(f"Number of samples: {len(df)}")
+print(f"Feature names: {list(diabetes_data.feature_names)}")
+print(f"Target range: {df['target'].min():.2f} to {df['target'].max():.2f}")
+print(f"Average target value: {df['target'].mean():.2f}")
+
+print("\nCorrelation of features with target:")
+numeric_df = df.select_dtypes(include=[np.number])
+correlations = numeric_df.corr()['target'].sort_values(ascending=False)
+print(correlations)
+
+print("\nAll pandas tasks completed successfully!")
+
+print("=" * 50)
+print("Task 5 - Advanced Data Analysis")
+print("=" * 50)
+
+print("\n5.1 Calculate mean values for each attribute using numpy:")
+features = diabetes_data.feature_names
+for i, feature in enumerate(features):
+    feature_mean = np.mean(diabetes_data.data[:, i])
+    print(f"{feature}: {feature_mean:.6f}")
+
+print("\n5.2 Histograms for each attribute:")
+plt.figure(figsize=(15, 12))
+for i, feature in enumerate(features):
+    plt.subplot(4, 3, i+1)
+    plt.hist(diabetes_data.data[:, i], bins=20, alpha=0.7, edgecolor='black')
+    plt.title(f'Histogram of {feature}')
+    plt.xlabel(feature)
+    plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+
+print("\n5.3 Boxplots for each attribute:")
+plt.figure(figsize=(12, 8))
+df.drop(['target', 'target_category'], axis=1, errors='ignore').boxplot()
+plt.title('Boxplots of Diabetes Dataset Features')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+print("\n5.4 Compare distributions between different target categories:")
+numeric_features = df.select_dtypes(include=[np.number]).columns
+numeric_features = numeric_features.drop('target', errors='ignore')
+
+plt.figure(figsize=(16, 12))
+for i, feature in enumerate(numeric_features[:9]):  
+    plt.subplot(3, 3, i+1)
+    
+    for category in df['target_category'].unique():
+        subset = df[df['target_category'] == category]
+        plt.hist(subset[feature], alpha=0.5, label=category, bins=15)
+    
+    plt.title(f'Distribution of {feature} by Target Category')
+    plt.xlabel(feature)
+    plt.ylabel('Frequency')
+    plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+print("\n5.5 Correlation matrix:")
+correlation_matrix = df[numeric_features].corr()
+print("Correlation Matrix:")
+print(correlation_matrix)
+
+plt.figure(figsize=(10, 8))
+plt.imshow(correlation_matrix, cmap='coolwarm', aspect='auto')
+plt.colorbar()
+plt.xticks(range(len(numeric_features)), numeric_features, rotation=45)
+plt.yticks(range(len(numeric_features)), numeric_features)
+plt.title('Correlation Matrix Heatmap')
+plt.tight_layout()
+plt.show()
+
+print("\nAll Task 5 completed successfully!")
+print("\nAll tasks completed successfully! 🎉")
