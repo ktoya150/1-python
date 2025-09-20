@@ -260,4 +260,4 @@ plt.tight_layout()
 plt.show()
 
 print("\nAll Task 5 completed successfully!")
-print("\nAll tasks completed successfully! 🎉")
+print("\nAll tasks completed successfully!")
